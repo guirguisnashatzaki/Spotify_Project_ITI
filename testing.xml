@@ -1,0 +1,25 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="MyTestSuite">
+    <test name="Test1">
+        <classes>
+            <class name="Album.Add_Album_To_User"/>
+            <class name="Album.Get_Album"/>
+            <class name="Album.Remove_Album_From_User"/>
+            <class name="Artist.Get_One_Artist"/>
+            <class name="Artist.Get_The_Artist_Albums"/>
+            <class name="Complicated_Scenarios.New_Releases_Test"/>
+            <class name="Complicated_Scenarios.Rate_Limit_Test"/>
+            <class name="Playlist.Create_Playlist"/>
+            <class name="Playlist.Create_Playlist_Without_Name"/>
+            <class name="Playlist.Create_Playlist_Without_Description"/>
+            <class name="Playlist.Add_Track_To_Playlist"/>
+            <class name="Playlist.Update_Playlist"/>
+            <class name="Playlist.Remove_Track_From_Playlist"/>
+            <class name="Track.Get_Track"/>
+            <class name="Track.Add_Track_To_User"/>
+            <class name="Track.Remove_Track_From_User"/>
+            <class name="User.GetUserProfileTest"/>
+            <class name="User.GetCurrentUserWithWrongToken"/>
+        </classes>
+    </test>
+</suite>
