@@ -1,4 +1,4 @@
-🎵 ITI Spotify API Automation Project
+#🎵 ITI Spotify API Automation Project
 📘 Overview
 
 This project is an API testing and automation suite for the Spotify Web API
@@ -7,7 +7,7 @@ It validates user, playlist, track, album, and artist functionalities using both
 
 The goal is to ensure Spotify’s REST endpoints behave as expected under different test scenarios — including CRUD operations, authentication flows, and idempotency checks.
 
-🧱 Tech Stack
+#🧱 Tech Stack
 
 Postman – Manual API testing & scripting
 
@@ -21,14 +21,14 @@ Maven – Build and dependency management
 
 GitHub / GitLab CI – Optional continuous testing setup
 
-📂 Project Structure
+#📂 Project Structure
 .
 ├── ITI Spotify Collection.postman_collection.json    # Postman test collection
 ├── src/test/java/...                                 # Rest Assured automated tests
 ├── pom.xml                                           # Maven dependencies (Rest Assured, Allure)
 └── README.md                                         # Documentation (this file)
 
-🧩 API Coverage
+#🧩 API Coverage
 Category	Endpoints Tested	Scenarios Covered
 User	/me	✅ Get Current User (valid token)
 🚫 Invalid Token Handling
@@ -62,7 +62,7 @@ Save user’s album or track
 
 Update playlist name and confirm persistence
 
-🚫 Negative Test Cases
+#🚫 Negative Test Cases
 
 Attempt API call with invalid token → Expect 401 Unauthorized
 
@@ -70,7 +70,7 @@ Create playlist with empty name → Expect 400 Bad Request
 
 Remove already-deleted track → Verify idempotent behavior (200/204)
 
-♻️ Idempotency Checks
+#♻️ Idempotency Checks
 
 All DELETE operations (Tracks, Albums, Playlists) are tested twice to confirm:
 
@@ -94,7 +94,7 @@ Run the full collection or specific folders (User, Playlist, etc.)
 
 Check results in the Tests tab.
 
-💻 In Command Line (Newman)
+#💻 In Command Line (Newman)
 
 Run collection from terminal:
 
@@ -122,7 +122,7 @@ Allure HTML Report with request/response logs, assertions, and screenshots.
 
 Postman/Newman HTML Report with per-request test outcomes.
 
-📊 Example Assertions
+#📊 Example Assertions
 // Validate playlist creation
 given()
   .header("Authorization", "Bearer " + token)
@@ -142,7 +142,7 @@ given()
 .then()
   .statusCode(anyOf(is(200), is(204)));
 
-🚀 Future Enhancements
+#🚀 Future Enhancements
 
 Add data-driven testing using JSON/CSV
 
@@ -152,7 +152,7 @@ Add OAuth token auto-refresh logic
 
 Include Spotify API mocks for offline testing
 
-👨‍💻 Author
+#👨‍💻 Author
 
 Guirguis Nashat
 📍ITI - API Automation Project
