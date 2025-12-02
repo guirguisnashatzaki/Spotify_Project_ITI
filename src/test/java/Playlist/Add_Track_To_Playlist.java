@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.number.OrderingComparison.lessThan;
 
 public class Add_Track_To_Playlist extends BaseTestClass {
 
@@ -31,7 +32,7 @@ public class Add_Track_To_Playlist extends BaseTestClass {
                 .statusCode(201)
                 .body("snapshot_id", org.hamcrest.Matchers.notNullValue())
                 .extract().response();
-        System.out.println(response.body().asString());
+        System.out.println(response.body().prettyPrint());
     }
 
     @Test
@@ -42,6 +43,7 @@ public class Add_Track_To_Playlist extends BaseTestClass {
                 .header("Content-Type", "application/json")
                 .get("/playlists/" + dataClass.Playlist_Id_To_Update)
                 .then()
+                .time(lessThan(2000L))
                 .assertThat()
                 .statusCode(200);
         Response tracks = given().when()
@@ -49,6 +51,7 @@ public class Add_Track_To_Playlist extends BaseTestClass {
                 .header("Content-Type", "application/json")
                 .get("/playlists/" + dataClass.Playlist_Id_To_Update)
                 .then()
+                .time(lessThan(2000L))
                 .extract().response();
 
         List<Map<String, Object>> items = tracks.jsonPath().getList("tracks.items");

@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.number.OrderingComparison.lessThan;
 
 public class Update_Playlist extends BaseTestClass {
 
@@ -22,6 +23,7 @@ public class Update_Playlist extends BaseTestClass {
                 .when()
                 .put("playlists/"+dataClass.Playlist_Id_To_Update)
                 .then()
+                .time(lessThan(2000L))
                 .assertThat()
                 .statusCode(200)
                 .extract().response();
@@ -36,6 +38,7 @@ public class Update_Playlist extends BaseTestClass {
                 .header("Content-Type", "application/json")
                 .get("/playlists/" + dataClass.Playlist_Id_To_Update)
                 .then()
+                .time(lessThan(2000L))
                 .assertThat()
                 .statusCode(200);
     }

@@ -6,6 +6,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.number.OrderingComparison.lessThan;
 
 public class Add_Track_To_User extends BaseTestClass {
 
@@ -23,6 +24,7 @@ public class Add_Track_To_User extends BaseTestClass {
                 .when()
                 .put("/me/tracks")
                 .then()
+                .time(lessThan(2000L))
                 .assertThat()
                 .statusCode(200);
     }
@@ -41,6 +43,7 @@ public class Add_Track_To_User extends BaseTestClass {
                 .when()
                 .put("/me/tracks")
                 .then()
+                .time(lessThan(2000L))
                 .assertThat()
                 .statusCode(200)
                 .extract().response();
@@ -58,11 +61,13 @@ public class Add_Track_To_User extends BaseTestClass {
                 .when()
                 .get("/me/tracks")
                 .then()
+                .time(lessThan(2000L))
                 .statusCode(200)
                 .extract().response();
 
         // Extract linked_from.id from JSON
 
+        System.out.println(response.body().prettyPrint());
         String linkedFromId = response.jsonPath().getString("items[0].track.id");
         // ✅ Assert equality
         Assert.assertEquals(linkedFromId, dataClass.TRACK_ID, "Linked track ID does not match!");
@@ -77,9 +82,15 @@ public class Add_Track_To_User extends BaseTestClass {
                 .when()
                 .get("/me/tracks?market=ES&limit=10&offset=0")
                 .then()
+                .time(lessThan(2000L))
                 .assertThat()
                 .statusCode(200)
                 .extract().response();
+
+        String trackId = response.jsonPath().getString("items[0].track.id");
+        String artistName = response.jsonPath().getString("items[0].track.artists[0].name");
+        String albumName = response.jsonPath().getString("items[0].track.album.name");
+        Assert.assertNotNull(trackId, "Track ID is null");
     }
 
 

@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.number.OrderingComparison.lessThan;
 
 
 public class Create_Playlist extends BaseTestClass {
@@ -25,6 +26,7 @@ public class Create_Playlist extends BaseTestClass {
                 .when()
                 .post("/users/"+dataClass.USER_ID+"/playlists")
                 .then()
+                .time(lessThan(2000L))
                 .assertThat()
                 .statusCode(201)
                 .extract().response();
@@ -44,6 +46,7 @@ public class Create_Playlist extends BaseTestClass {
                 .when()
                 .post("/users/"+dataClass.USER_ID+"/playlists")
                 .then()
+                .time(lessThan(2000L))
                 .assertThat()
                 .statusCode(201)
                 .body("id", notNullValue())
@@ -65,6 +68,7 @@ public class Create_Playlist extends BaseTestClass {
                 .when()
                 .post("/users/"+dataClass.USER_ID+"/playlists")
                 .then()
+                .time(lessThan(2000L))
                 .assertThat()
                 .statusCode(201)
                 .body("id", notNullValue())
@@ -83,6 +87,7 @@ public class Create_Playlist extends BaseTestClass {
                 .header("Content-Type", "application/json")
                 .get("/playlists/AAAAAAAAAAAAAAAAAAAAAAAAA")
                 .then()
+                .time(lessThan(2000L))
                 .assertThat()
                 .statusCode(400)
                 .extract().response();
@@ -97,6 +102,7 @@ public class Create_Playlist extends BaseTestClass {
                 .header("Content-Type", "application/json")
                 .get("/playlists/" + dataClass.Playlist_Id_To_Update)
                 .then()
+                .time(lessThan(2000L))
                 .assertThat()
                 .statusCode(200)
                 .extract().response();

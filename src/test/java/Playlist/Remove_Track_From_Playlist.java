@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.core.AnyOf.anyOf;
+import static org.hamcrest.number.OrderingComparison.lessThan;
 
 public class Remove_Track_From_Playlist extends BaseTestClass {
 
@@ -30,6 +31,7 @@ public class Remove_Track_From_Playlist extends BaseTestClass {
                 .when()
                 .delete("playlists/"+dataClass.Playlist_Id_To_Update+"/tracks")
                 .then()
+                .time(lessThan(2000L))
                 .assertThat()
                 .statusCode(200)
                 .body("snapshot_id", anyOf(org.hamcrest.Matchers.notNullValue()), org.hamcrest.Matchers.nullValue())
@@ -52,6 +54,7 @@ public class Remove_Track_From_Playlist extends BaseTestClass {
                 .when()
                 .delete("playlists/"+dataClass.Playlist_Id_To_Update+"/tracks")
                 .then()
+                .time(lessThan(2000L))
                 .assertThat()
                 .statusCode(anyOf(is(200), is(204), anyOf(is(400), is(403))))
                 .body("snapshot_id", anyOf(org.hamcrest.Matchers.notNullValue(), org.hamcrest.Matchers.nullValue()))
@@ -66,6 +69,7 @@ public class Remove_Track_From_Playlist extends BaseTestClass {
                 .accept( "application/json")
                 .get("/playlists/" + dataClass.Playlist_Id_To_Update)
                 .then()
+                .time(lessThan(2000L))
                 .assertThat()
                 .statusCode(200).extract().response();
 
@@ -75,6 +79,7 @@ public class Remove_Track_From_Playlist extends BaseTestClass {
                 .accept("application/json")
                 .get("/playlists/" + dataClass.PLAYLIST_ID)
                 .then()
+                .time(lessThan(2000L))
                 .extract()
                 .response();
 

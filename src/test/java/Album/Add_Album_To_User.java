@@ -11,13 +11,14 @@ import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.number.OrderingComparison.lessThan;
 
 public class Add_Album_To_User extends BaseTestClass {
 
     @Test
     public void verifyStatusCodeForAddAlbumToUser() {
         // Implementation for adding an album to a user's library and verifying the status code
-        given()
+        given() // repeated code
                 .header("Authorization", "Bearer " + dataClass.ACCESS_TOKEN)
                 .header("Content-Type", "application/json")
                 .body("{\n" +
@@ -26,8 +27,9 @@ public class Add_Album_To_User extends BaseTestClass {
                         "    ]\n" +
                         "}")
                 .when()
-                .put("/me/albums")
+                .put("/me/albums")//rest method (get,post,put,delete)
                 .then()
+                .time(lessThan(2000L))
                 .assertThat()
                 .statusCode(200);
     }
@@ -46,6 +48,7 @@ public class Add_Album_To_User extends BaseTestClass {
                 .when()
                 .put("/me/albums")
                 .then()
+                .time(lessThan(2000L))
                 .assertThat()
                 .statusCode(200)
                 .extract().response();
@@ -63,6 +66,7 @@ public class Add_Album_To_User extends BaseTestClass {
                 .when()
                 .get("/me/albums?market=ES&limit=10&offset=0")
                 .then()
+                .time(lessThan(2000L))
                 .statusCode(200)
                 .extract().response();
 
@@ -84,6 +88,7 @@ public class Add_Album_To_User extends BaseTestClass {
                 .when()
                 .get()
                 .then()
+                .time(lessThan(2000L))
                 .statusCode(200)
                 .extract()
                 .response();

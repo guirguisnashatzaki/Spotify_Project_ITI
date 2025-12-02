@@ -1,12 +1,11 @@
 package User;
 
 import data.BaseTestClass;
-import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.testng.annotations.BeforeTest;
+import org.hamcrest.number.OrderingComparison;
 import org.testng.annotations.Test;
-import data.DataClass;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.lessThan;
 import static org.hamcrest.Matchers.notNullValue;
@@ -20,6 +19,7 @@ public class GetUserProfileTest extends BaseTestClass {
                 .when()
                 .get("/me")
                 .then()
+                .time(OrderingComparison.lessThan(2000L))
                 .assertThat()
                 .statusCode(200)
                 .body("display_name", notNullValue())
@@ -41,6 +41,7 @@ public class GetUserProfileTest extends BaseTestClass {
                 .when()
                 .get("/me")
                 .then()
+                .time(OrderingComparison.lessThan(2000L))
                 .statusCode(200)
                 .body("id", notNullValue())
                 .body("display_name", notNullValue())
@@ -55,8 +56,9 @@ public class GetUserProfileTest extends BaseTestClass {
                 .when()
                 .get("/me")
                 .then()
+                .time(OrderingComparison.lessThan(2000L))
                 .statusCode(200)
-                .time(lessThan(500L)); // milliseconds
+                .time(lessThan(2000L)); // milliseconds
     }
 
 

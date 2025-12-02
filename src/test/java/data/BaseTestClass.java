@@ -4,7 +4,7 @@ import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.RestAssured;
 import org.testng.annotations.BeforeTest;
 
-import static io.restassured.RestAssured.*;
+import static io.restassured.RestAssured.filters;
 
 public class BaseTestClass {
 
@@ -15,5 +15,8 @@ public class BaseTestClass {
         RestAssured.baseURI = dataClass.SPOTIFY_BASE_URL;
         filters(new AllureRestAssured());
     }
+
+    // Add any common methods or configurations for your tests here
+
 
 }

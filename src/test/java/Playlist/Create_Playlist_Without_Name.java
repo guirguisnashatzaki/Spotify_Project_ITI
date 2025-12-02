@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.number.OrderingComparison.lessThan;
 
 
 public class Create_Playlist_Without_Name extends BaseTestClass {
@@ -22,6 +23,7 @@ public class Create_Playlist_Without_Name extends BaseTestClass {
                 .when()
                 .post("/users/"+dataClass.USER_ID+"/playlists")
                 .then()
+                .time(lessThan(2000L))
                 .assertThat()
                 .statusCode(400)
                 .extract().response();
@@ -39,6 +41,7 @@ public class Create_Playlist_Without_Name extends BaseTestClass {
                 .when()
                 .post("/users/"+dataClass.USER_ID+"/playlists")
                 .then()
+                .time(lessThan(2000L))
                 .assertThat()
                 .statusCode(400)
                 .body("error", notNullValue())
@@ -56,6 +59,7 @@ public class Create_Playlist_Without_Name extends BaseTestClass {
                 .when()
                 .post("/users/"+dataClass.USER_ID+"/playlists")
                 .then()
+                .time(lessThan(2000L))
                 .assertThat()
                 .statusCode(400)
                 .body("error", notNullValue())

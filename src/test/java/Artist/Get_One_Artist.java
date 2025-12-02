@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.number.OrderingComparison.lessThan;
 
 public class Get_One_Artist extends BaseTestClass {
 
@@ -16,6 +17,7 @@ public class Get_One_Artist extends BaseTestClass {
                 .header("Content-Type", "application/json")
                 .get("/artists/" + dataClass.ARTIST_ID)
                 .then()
+                .time(lessThan(2000L))
                 .assertThat()
                 .statusCode(200);
     }
@@ -27,6 +29,7 @@ public class Get_One_Artist extends BaseTestClass {
                 .header("Content-Type", "application/json")
                 .get("/artists/" + dataClass.ARTIST_ID)
                 .then()
+                .time(lessThan(2000L))
                 .assertThat()
                 .statusCode(200)
                 .body("id", notNullValue())

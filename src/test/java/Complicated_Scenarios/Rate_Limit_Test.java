@@ -27,7 +27,7 @@ public class Rate_Limit_Test extends BaseTestClass {
             } else if (response.statusCode() == 429) {
                 int wait = response.getHeader("Retry-After") != null ?
                         Integer.parseInt(response.getHeader("Retry-After")) : 1;
-                try { Thread.sleep(wait * 1000L); } catch (InterruptedException ignored) {}
+                try { Thread.sleep(wait * 2000L); } catch (InterruptedException ignored) {}
             }
             attempts++;
         }

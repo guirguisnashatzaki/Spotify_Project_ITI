@@ -5,8 +5,10 @@
             <class name="Album.Add_Album_To_User"/>
             <class name="Album.Get_Album"/>
             <class name="Album.Remove_Album_From_User"/>
+            <class name="Album.Get_Several_Albums"/>
             <class name="Artist.Get_One_Artist"/>
             <class name="Artist.Get_The_Artist_Albums"/>
+            <class name="Artist.Get_Several_Artists"/>
             <class name="Complicated_Scenarios.New_Releases_Test"/>
             <class name="Complicated_Scenarios.Rate_Limit_Test"/>
             <class name="Playlist.Create_Playlist"/>

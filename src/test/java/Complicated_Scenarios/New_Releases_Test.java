@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.number.OrderingComparison.lessThan;
 
 public class New_Releases_Test extends BaseTestClass {
 
@@ -21,6 +22,7 @@ public class New_Releases_Test extends BaseTestClass {
                     .when()
                     .get("/browse/new-releases")
                     .then()
+                    .time(lessThan(2000L))
                     .statusCode(200)
                     .body("albums.items[0].available_markets", hasItem(market))
                     .body("albums.items.size()", greaterThan(0));

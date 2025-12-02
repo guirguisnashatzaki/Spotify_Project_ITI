@@ -10,6 +10,7 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.number.OrderingComparison.lessThan;
 
 public class Remove_Album_From_User extends BaseTestClass {
 
@@ -43,6 +44,7 @@ public class Remove_Album_From_User extends BaseTestClass {
                 .when()
                 .get("/me/albums?market=ES&limit=10&offset=0")
                 .then()
+                .time(lessThan(2000L))
                 .statusCode(200)
                 .extract().response();
 
@@ -67,6 +69,7 @@ public class Remove_Album_From_User extends BaseTestClass {
                 .when()
                 .delete("/me/albums")  // adjust method/path if different
                 .then()
+                .time(lessThan(2000L))
                 .statusCode(anyOf(is(200), is(204)))
                 .extract().response();
     }

@@ -1,14 +1,13 @@
 package User;
 
 import data.BaseTestClass;
-import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import data.DataClass;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.number.OrderingComparison.lessThan;
 
 public class GetCurrentUserWithWrongToken extends BaseTestClass {
 
@@ -21,6 +20,7 @@ public class GetCurrentUserWithWrongToken extends BaseTestClass {
                 .when()
                 .get("/me")
                 .then()
+                .time(lessThan(2000L))
                 .assertThat()
                 .statusCode(401)
                 .body("error", notNullValue())
@@ -38,6 +38,7 @@ public class GetCurrentUserWithWrongToken extends BaseTestClass {
                 .when()
                 .get("/me")
                 .then()
+                .time(lessThan(2000L))
                 .statusCode(401)
                 .body("error", notNullValue());
     }
