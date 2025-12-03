@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="MyTestSuite">
+    <test name="Test1">
+        <classes>
+            <class name="Playlist.Create_Playlist_With_Different_Scope"/>
+        </classes>
+    </test>
+</suite>
