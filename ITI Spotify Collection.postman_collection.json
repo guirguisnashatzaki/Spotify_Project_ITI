@@ -1,0 +1,2438 @@
+{
+	"info": {
+		"_postman_id": "187ddfec-f434-420d-a1e4-1e9d84bb7b97",
+		"name": "ITI Spotify Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17475365"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get_Current_User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"const jsonData = pm.response.json();\r",
+									"pm.environment.set(\"spotify_userID\", jsonData.id);\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"// Check for the existence of id, name, email and country\r",
+									"pm.test(\"Response contains id, name, and url\", function () {\r",
+									"    pm.expect(jsonData).to.have.property('id');\r",
+									"    pm.expect(jsonData).to.have.property('display_name');\r",
+									"    pm.expect(jsonData).to.have.property('country');\r",
+									"    pm.expect(jsonData).to.have.property('email');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "BQCj81uGiDuGS8IKa_Fam0BYG-3BwOCA8Sqa97GKvpGoL7JrhbmaXA6TR5N8nmYJtOxeBSucWcCW4qFi1TR9Ihgblzfe-DlQ97vvJw-Hp-mqw_tij0PxNZTOZyVGab1yVgFaWyYL63xE7rsOaJtm_BNHvdR0sh3wo5u-nswpXL2PccSPF9g7nunsO3rWrUclJa1XIhUYf7cOS-0bUj336Woqlz0JUbecd2z-Oc3PHwNZqy2P3g",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "expires_in",
+									"value": 3600,
+									"type": "number"
+								},
+								{
+									"key": "refresh_token",
+									"value": "AQDvBQ6Tnigd1dTyp7X2sGfv1v3yKMC_K77jk_ub8lx-suVMbtb05zlnFkktASEFF6lLNoz_7K7OMnv73dLEtegGtEnPAeA62HdeiMSUnIZ7sdKD1BGOEokTMfdSnNA4eb4",
+									"type": "string"
+								},
+								{
+									"key": "createdAt",
+									"value": "2025-11-24T14:07:06.817Z",
+									"type": "string"
+								},
+								{
+									"key": "client_authentication",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "https://accounts.spotify.com/authorize",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "278a6a0526f142009923f96e2d677256",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "https://accounts.spotify.com/api/token",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "Spotify API",
+									"type": "string"
+								},
+								{
+									"key": "useBrowser",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{spotify_base_url}}/me",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_Current_User_With_Wrong_Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									"\r",
+									"// Check for the existence of error\r",
+									"pm.test(\"Response contains id, name, and url\", function () {\r",
+									"    pm.expect(jsonData).to.have.property('error');\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "accessToken",
+									"value": "BQADGe3g_X2mZTUaM_QJP9bYg_kiNRwfia6IsQn1A1h4ZRpZFBXKs2war3ZuDlge56svbK0l3smdt4V1nNYAUmUXaRtQSCVD4UicZxPVFLRV3V7Hc4xP13vsQmiOsoD0Wc1oshE2bI-ybfxkQFe5sNfVcU2TsY6iAQrZtq9OWRX7uboIkNmHHbzDrVo9yAtAyrk9dmLCKF2gTAv6UZZs9BKgr8zKEzqrVJAf9ZJSRuAcwkXbWQ",
+									"type": "string"
+								},
+								{
+									"key": "tokenType",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "expires_in",
+									"value": 3600,
+									"type": "number"
+								},
+								{
+									"key": "refresh_token",
+									"value": "AQBuuJSmbcUZ6JWm3YGClVWEnzi0-NM4ekb-zO6VMeItDwhg6xWRwrw7oQuuG19xG0eqDW6AZ2GjolQPs7TsJM_4qrnMdmieZeuTPwf1Knw71riwblHnb17-7a3yzLnR89E",
+									"type": "string"
+								},
+								{
+									"key": "createdAt",
+									"value": "2025-10-21T14:36:24.950Z",
+									"type": "string"
+								},
+								{
+									"key": "client_authentication",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "authorization_code",
+									"type": "string"
+								},
+								{
+									"key": "authUrl",
+									"value": "https://accounts.spotify.com/authorize",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "278a6a0526f142009923f96e2d677256",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "https://accounts.spotify.com/api/token",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "Spotify API",
+									"type": "string"
+								},
+								{
+									"key": "useBrowser",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{spotify_base_url}}/me",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Playlist",
+			"item": [
+				{
+					"name": "Create playlist without name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"pm.environment.set(\"playlist_id\", jsonData.id);\r",
+									"\r",
+									"\r",
+									"// Check for the status code\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"// Check for the existence of error\r",
+									"pm.test(\"Response contains error\", function () {\r",
+									"    pm.expect(jsonData).to.have.property('error');\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let rand = Math.floor(Math.random() * 999);\r",
+									"\r",
+									"let name = \"Playlist\" + rand;\r",
+									"\r",
+									"pm.environment.set(\"random_playlist_name\",name)"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"\",\r\n    \"description\": \"guirguis\",\r\n    \"public\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{spotify_base_url}}/users/{{spotify_userID}}/playlists",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"users",
+								"{{spotify_userID}}",
+								"playlists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one playlist without name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{spotify_base_url}}/playlists/{{playlist_id}}",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"playlists",
+								"{{playlist_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create playlist without description",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"pm.environment.set(\"playlist_id\", jsonData.id);\r",
+									"\r",
+									"\r",
+									"// Check for the status code\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(201);\r",
+									"});\r",
+									"\r",
+									"// Check for the existence of id, name\r",
+									"pm.test(\"Response contains id and name\", function () {\r",
+									"    pm.expect(jsonData).to.have.property('id');\r",
+									"    pm.expect(jsonData).to.have.property('name');\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let rand = Math.floor(Math.random() * 999);\r",
+									"\r",
+									"let name = \"Playlist\" + rand;\r",
+									"\r",
+									"pm.environment.set(\"random_playlist_name\",name)"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{random_playlist_name}}\",\r\n    \"description\": \"\",\r\n    \"public\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{spotify_base_url}}/users/{{spotify_userID}}/playlists",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"users",
+								"{{spotify_userID}}",
+								"playlists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one playlist without description",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Make sure the Playlist is created\", function () {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response.name).to.equal(pm.environment.get(\"random_playlist_name\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{spotify_base_url}}/playlists/{{playlist_id}}",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"playlists",
+								"{{playlist_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create playlist",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let rand = Math.floor(Math.random() * 999);\r",
+									"\r",
+									"let name = \"Playlist\" + rand;\r",
+									"\r",
+									"pm.environment.set(\"random_playlist_name\",name)"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const jsonData = pm.response.json();\r",
+									"pm.environment.set(\"playlist_id\", jsonData.id);\r",
+									"\r",
+									"\r",
+									"// Check for the status code\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.expect(pm.response.code).to.equal(201);\r",
+									"});\r",
+									"\r",
+									"// Check for the existence of id, name\r",
+									"pm.test(\"Response contains id and name\", function () {\r",
+									"    pm.expect(jsonData).to.have.property('id');\r",
+									"    pm.expect(jsonData).to.have.property('name');\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Playlist name matches the random_playlist_name\", function () {\r",
+									"    pm.expect(jsonData.name).to.equal(pm.environment.get(\"random_playlist_name\"));\r",
+									"});\r",
+									"\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{random_playlist_name}}\",\r\n    \"description\": \"guirguis\",\r\n    \"public\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{spotify_base_url}}/users/{{spotify_userID}}/playlists",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"users",
+								"{{spotify_userID}}",
+								"playlists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one playlist normal case",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Make sure the Playlist is created\", function () {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response.name).to.equal(pm.environment.get(\"random_playlist_name\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{spotify_base_url}}/playlists/{{playlist_id}}",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"playlists",
+								"{{playlist_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Playlist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body is correct\", function () {\r",
+									"    pm.response.to.have.body(\"\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let rand = Math.floor(Math.random() * 999);\r",
+									"\r",
+									"let name = \"Updated Playlist\" + rand;\r",
+									"\r",
+									"pm.environment.set(\"updated_playlist_name\",name);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"{{updated_playlist_name}}\",\r\n    \"description\": \"Updated playlist description\",\r\n    \"public\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{spotify_base_url}}/playlists/{{playlist_id}}",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"playlists",
+								"{{playlist_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get updated playlist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Make sure the Playlist is updated\", function () {\r",
+									"    const response = pm.response.json();\r",
+									"    pm.expect(response.name).to.equal(pm.environment.get(\"updated_playlist_name\"));\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{spotify_base_url}}/playlists/{{playlist_id}}",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"playlists",
+								"{{playlist_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add track to playlist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"snapshot_id\", pm.response.json().snapshot_id);\r",
+									"\r",
+									"pm.test(\"Snapshot ID is not null\", function () {\r",
+									"    pm.expect(pm.environment.get(\"snapshot_id\")).to.not.be.null;\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"uris\": [\r\n        \"spotify:track:{{Track_id}}\"\r\n    ],\r\n    \"position\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{spotify_base_url}}/playlists/{{playlist_id}}/tracks",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"playlists",
+								"{{playlist_id}}",
+								"tracks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one playlist checking adding",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Track is added\", function () {\r",
+									"    var result = pm.response.json().tracks.items[0].track.id;\r",
+									"    pm.expect(result).to.equal(pm.environment.get(\"Track_id\"));\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{spotify_base_url}}/playlists/{{playlist_id}}",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"playlists",
+								"{{playlist_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove item from playlist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 204\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Playlist snapshot_id is returned\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"snapshot_id\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tracks\": [\r\n        {\r\n            \"uri\":\"spotify:track:{{Track_id}}\"\r\n        }\r\n    ],\r\n    \"snapshot_id\": \"{{snapshot_id}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{spotify_base_url}}/playlists/{{playlist_id}}/tracks",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"playlists",
+								"{{playlist_id}}",
+								"tracks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Checking idempotent api",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Second delete is idempotent\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Playlist snapshot_id is returned\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"snapshot_id\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tracks\": [\r\n        {\r\n            \"uri\":\"spotify:track:{{Track_id}}\"\r\n        }\r\n    ],\r\n    \"snapshot_id\": \"{{snapshot_id}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{spotify_base_url}}/playlists/{{playlist_id}}/tracks",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"playlists",
+								"{{playlist_id}}",
+								"tracks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one playlist checking deleting",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{spotify_base_url}}/playlists/{{playlist_id}}",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"playlists",
+								"{{playlist_id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Track",
+			"item": [
+				{
+					"name": "Get Track",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.environment.set(\"Album_id\", pm.response.json().album.id);\r",
+									"\r",
+									"pm.environment.set(\"Artist_id\", pm.response.json().album.artists[0].id);\r",
+									"\r",
+									"\r",
+									"pm.test(\"Track id,artist and album are returned\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"id\");\r",
+									"    pm.expect(jsonData).to.have.property(\"artists\");\r",
+									"    pm.expect(jsonData).to.have.property(\"album\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{spotify_base_url}}/tracks/{{Track_id}}",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"tracks",
+								"{{Track_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save tracks for the current user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ids\": [\r\n        \"{{Track_id}}\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{spotify_base_url}}/me/tracks",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"me",
+								"tracks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get the user tracks",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Body matches string\", function () {",
+									"    pm.expect(pm.response.json().items[0].track.id).to.equal(pm.environment.get(\"Track_id\"));",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{spotify_base_url}}/me/tracks",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"me",
+								"tracks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove User saved tracks",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 204\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ids\": [\r\n        \"{{Track_id}}\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{spotify_base_url}}/me/tracks",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"me",
+								"tracks"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get the user tracks checking deletion",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{spotify_base_url}}/me/tracks?market=ES&limit=10&offset=0",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"me",
+								"tracks"
+							],
+							"query": [
+								{
+									"key": "market",
+									"value": "ES"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Checking idempotent api",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Second delete is idempotent\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ids\": [\r\n        \"{{Track_id}}\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{spotify_base_url}}/me/tracks",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"me",
+								"tracks"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Album",
+			"item": [
+				{
+					"name": "Get Album",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Album has the required properties\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"album_type\");\r",
+									"    pm.expect(jsonData).to.have.property(\"total_tracks\");\r",
+									"    pm.expect(jsonData).to.have.property(\"available_markets\");\r",
+									"    pm.expect(jsonData).to.have.property(\"external_urls\");\r",
+									"    pm.expect(jsonData).to.have.property(\"href\");\r",
+									"    pm.expect(jsonData).to.have.property(\"id\");\r",
+									"    pm.expect(jsonData).to.have.property(\"images\");\r",
+									"    pm.expect(jsonData).to.have.property(\"name\");\r",
+									"    pm.expect(jsonData).to.have.property(\"release_date\");\r",
+									"    pm.expect(jsonData).to.have.property(\"release_date_precision\");\r",
+									"    pm.expect(jsonData).to.have.property(\"type\");\r",
+									"    pm.expect(jsonData).to.have.property(\"uri\");\r",
+									"    pm.expect(jsonData).to.have.property(\"artists\");\r",
+									"    pm.expect(jsonData).to.have.property(\"tracks\");\r",
+									"    pm.expect(jsonData).to.have.property(\"copyrights\");\r",
+									"    pm.expect(jsonData).to.have.property(\"external_ids\");\r",
+									"    pm.expect(jsonData).to.have.property(\"genres\");\r",
+									"    pm.expect(jsonData).to.have.property(\"label\");\r",
+									"    pm.expect(jsonData).to.have.property(\"popularity\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{spotify_base_url}}/albums/{{Album_id}}",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"albums",
+								"{{Album_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Save album for the current user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ids\": [\r\n        \"{{Album_id}}\"\r\n    ]\r\n}"
+						},
+						"url": {
+							"raw": "{{spotify_base_url}}/me/albums",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"me",
+								"albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get the user albums",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"// Parse the JSON response\r",
+									"let jsonData = pm.response.json();\r",
+									"\r",
+									"// Get the last item (index = length - 1)\r",
+									"let lastItem = jsonData.items[0];\r",
+									"\r",
+									"// Extract the album ID\r",
+									"let lastAlbumId = lastItem.album;\r",
+									"\r",
+									"pm.test(\"Album has the required properties\", function () {\r",
+									"\r",
+									"    pm.expect(lastAlbumId).to.have.property(\"album_type\");\r",
+									"    pm.expect(lastAlbumId).to.have.property(\"total_tracks\");\r",
+									"    pm.expect(lastAlbumId).to.have.property(\"external_urls\");\r",
+									"    pm.expect(lastAlbumId).to.have.property(\"href\");\r",
+									"    pm.expect(lastAlbumId).to.have.property(\"id\");\r",
+									"    pm.expect(lastAlbumId).to.have.property(\"images\");\r",
+									"    pm.expect(lastAlbumId).to.have.property(\"name\");\r",
+									"    pm.expect(lastAlbumId).to.have.property(\"release_date\");\r",
+									"    pm.expect(lastAlbumId).to.have.property(\"release_date_precision\");\r",
+									"    pm.expect(lastAlbumId).to.have.property(\"type\");\r",
+									"    pm.expect(lastAlbumId).to.have.property(\"uri\");\r",
+									"    pm.expect(lastAlbumId).to.have.property(\"artists\");\r",
+									"    pm.expect(lastAlbumId).to.have.property(\"tracks\");\r",
+									"    pm.expect(lastAlbumId).to.have.property(\"copyrights\");\r",
+									"    pm.expect(lastAlbumId).to.have.property(\"external_ids\");\r",
+									"    pm.expect(lastAlbumId).to.have.property(\"genres\");\r",
+									"    pm.expect(lastAlbumId).to.have.property(\"label\");\r",
+									"    pm.expect(lastAlbumId).to.have.property(\"popularity\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{spotify_base_url}}/me/albums?market=ES&limit=10&offset=0",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"me",
+								"albums"
+							],
+							"query": [
+								{
+									"key": "market",
+									"value": "ES"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove User saved albums",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 204\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ids\": [\r\n        \"{{Album_id}}\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{spotify_base_url}}/me/albums",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"me",
+								"albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get the user albums checking deletion",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Album has the required properties\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"href\");\r",
+									"    pm.expect(jsonData).to.have.property(\"limit\");\r",
+									"    pm.expect(jsonData).to.have.property(\"next\");\r",
+									"    pm.expect(jsonData).to.have.property(\"offset\");\r",
+									"    pm.expect(jsonData).to.have.property(\"previous\");\r",
+									"    pm.expect(jsonData).to.have.property(\"total\");\r",
+									"    pm.expect(jsonData).to.have.property(\"items\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{spotify_base_url}}/me/albums?market=ES&limit=10&offset=0",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"me",
+								"albums"
+							],
+							"query": [
+								{
+									"key": "market",
+									"value": "ES"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Checking idempodent api",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200 or 204\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([200, 204]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"ids\": [\r\n        \"{{Album_id}}\"\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{spotify_base_url}}/me/albums",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"me",
+								"albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Several Albums",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check if the return body is null\",function(){\r",
+									"    pm.expect(pm.response.json()).to.not.be.null;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{spotify_base_url}}/albums?ids=382ObEPsp2rxGrnsizN5TX,1A2GTWGtFfWp7KSQTwWOyo,2noRn2Aes5aoNVsU6iWThc",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"albums"
+							],
+							"query": [
+								{
+									"key": "ids",
+									"value": "382ObEPsp2rxGrnsizN5TX,1A2GTWGtFfWp7KSQTwWOyo,2noRn2Aes5aoNVsU6iWThc"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Artist",
+			"item": [
+				{
+					"name": "Get Artist",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Artist id,name and type are returned\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"id\");\r",
+									"    pm.expect(jsonData).to.have.property(\"name\");\r",
+									"    pm.expect(jsonData).to.have.property(\"type\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{spotify_base_url}}/artists/{{Artist_id}}",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"artists",
+								"{{Artist_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get the artist albums",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Artist albums contains certain properties\", function () {\r",
+									"    const jsonData = pm.response.json();\r",
+									"    pm.expect(jsonData).to.have.property(\"href\");\r",
+									"    pm.expect(jsonData).to.have.property(\"limit\");\r",
+									"    pm.expect(jsonData).to.have.property(\"next\");\r",
+									"    pm.expect(jsonData).to.have.property(\"previous\");\r",
+									"    pm.expect(jsonData).to.have.property(\"total\");\r",
+									"    pm.expect(jsonData).to.have.property(\"items\");\r",
+									"    pm.expect(jsonData).to.have.property(\"offset\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{spotify_base_url}}/artists/{{Artist_id}}/albums",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"artists",
+								"{{Artist_id}}",
+								"albums"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Several Artists",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Check if the return body is null\",function(){\r",
+									"    pm.expect(pm.response.json()).to.not.be.null;\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{spotify_base_url}}/artists?ids=2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6",
+							"host": [
+								"{{spotify_base_url}}"
+							],
+							"path": [
+								"artists"
+							],
+							"query": [
+								{
+									"key": "ids",
+									"value": "2CIMQHirSU0MQqyYHq0eOx,57dN52uHvrHOxijzpIgu3E,1vCWHaC5f2uS3yhpwWbIA6"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Request_token_client",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"spotify_access_token\", pm.response.json().access_token);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "eafe9982b3884f0e8b9b58b82ad4301f",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "1a42254467e648019d04e15963d3e288",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic $(echo -n 1a42254467e648019d04e15963d3e288:eafe9982b3884f0e8b9b58b82ad4301f | base64)"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://accounts.spotify.com/api/token",
+					"protocol": "https",
+					"host": [
+						"accounts",
+						"spotify",
+						"com"
+					],
+					"path": [
+						"api",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Request_token_auth",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://accounts.spotify.com/authorize\n?client_id=1a42254467e648019d04e15963d3e288\n&response_type=code\n&redirect_uri=https://localhost:8888/callback&oq=ghost+town&gs_lcrp=EgZjaHJvbWUqBwgAEAAYjwIyBwgAEAAYjwIyBwgBEC4YgAQyBwgCEAAYgAQyBwgDEC4YgAQyBwgEEAAYgAQyBwgFEAAYgAQyBwgGEAAYgAQyBggHEEUYPNIBCDQ1OTFqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8\n&scope=user-read-private%20playlist-modify-public\n&state=someRandomState",
+					"protocol": "https",
+					"host": [
+						"accounts",
+						"spotify",
+						"com"
+					],
+					"path": [
+						"authorize\n"
+					],
+					"query": [
+						{
+							"key": "client_id",
+							"value": "1a42254467e648019d04e15963d3e288\n"
+						},
+						{
+							"key": "response_type",
+							"value": "code\n"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://localhost:8888/callback"
+						},
+						{
+							"key": "oq",
+							"value": "ghost+town"
+						},
+						{
+							"key": "gs_lcrp",
+							"value": "EgZjaHJvbWUqBwgAEAAYjwIyBwgAEAAYjwIyBwgBEC4YgAQyBwgCEAAYgAQyBwgDEC4YgAQyBwgEEAAYgAQyBwgFEAAYgAQyBwgGEAAYgAQyBggHEEUYPNIBCDQ1OTFqMGo3qAIAsAIA"
+						},
+						{
+							"key": "sourceid",
+							"value": "chrome"
+						},
+						{
+							"key": "ie",
+							"value": "UTF-8\n"
+						},
+						{
+							"key": "scope",
+							"value": "user-read-private%20playlist-modify-public\n"
+						},
+						{
+							"key": "state",
+							"value": "someRandomState"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					"pm.test(\"Response time is less than 500ms\", function () {\r",
+					"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+					"});"
+				]
+			}
+		}
+	]
+}
